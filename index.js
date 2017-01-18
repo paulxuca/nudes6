@@ -1,15 +1,17 @@
 const { classifySkin } = require('./utils');
-const BlobExtraction = require('./ccl');
 const ndarray = require('ndarray');
 const UnionFind = require('union-find-js');
 
 const scan = (imgData) => {
     const skinMap = [];
+    const skinData = [];
+    
 
     const [width, height] = imgData.shape;
     const ratio = Number((width/height).toPrecision(2));
     let x = 0;
-    
+
+    console.time('bottleneck');
     for (;x < width; x++) {
         for(let y = 0; y < height; y++) {
             const r = imgData.get(x, y, 0);
@@ -20,13 +22,12 @@ const scan = (imgData) => {
             skinMap.push(classifiedAsSkin);
         }
     }
+    console.timeEnd('bottleneck');
 
     const twod = ndarray(skinMap, [width, height]);
     const twodClone = ndarray(new Array(skinMap.length), [width, height]);
     // const uf = {};
     const uf = new UnionFind(2000);
-    
-    // console.log(twod.get(200, 200, 0));
     let currid = 0;
 
     for (let x = 0; x < width; x++) {
@@ -65,7 +66,7 @@ const scan = (imgData) => {
 
 
     const percentageSkin = twod.data.filter(e => e !== 0).length / twod.data.length;
-    console.log(percentageSkin);    
+    console.log(percentageSkin);
 
     const occurences = twodClone.data.reduce((t, e) => {
         const curr = t;

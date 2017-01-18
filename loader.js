@@ -8,5 +8,5 @@ const loadImageData = (path) => new Promise((resolve, reject) => {
     });
 });
 
-loadImageData('./1.jpg')
+loadImageData('./4.jpg')
 .then(data => scan(data));

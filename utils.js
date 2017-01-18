@@ -30,7 +30,8 @@ const classifySkin = ({ r, g, b }) => {
     const { h, s } = tinycolor({ r, g, b }).toHsv();
     hsvClassifier = (h > 0 && h < 35 && s > 0.23 && s < 0.68);
 
-    return (classifier || nRGBClassifer || hsvClassifier) ? 1 : 0;
+    const res = (classifier || nRGBClassifer || hsvClassifier) ? 1 : 0;
+    return res;
 };
 
 module.exports = {
