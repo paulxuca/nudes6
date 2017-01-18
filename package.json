@@ -1,0 +1,11 @@
+{
+  "name": "nudes6",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "get-pixels": "^3.3.0",
+    "tinycolor2": "^1.4.1",
+    "union-find-js": "^0.0.1"
+  }
+}
